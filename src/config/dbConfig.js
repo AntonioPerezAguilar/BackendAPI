@@ -19,7 +19,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.user = require('../model/user.js')(sequelize, Sequelize);
-db.role = require('../model/role.js')(sequelize, Sequelize);
+db.user = require('../model/user.js')(sequelize);
+db.role = require('../model/role.js')(sequelize);
 
 module.exports = db;
