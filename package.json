@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "express-joi-validate": "^3.0.1",
     "mariadb": "^2.4.2",
     "sequelize": "^6.3.4"
   },
