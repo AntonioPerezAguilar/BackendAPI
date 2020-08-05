@@ -15,8 +15,6 @@ const sequelize = new Sequelize(env.database, env.username, env.password, {
 });
 
 const db = {};
-
-db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.user = require('../model/user.js')(sequelize);
