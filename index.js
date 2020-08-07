@@ -8,10 +8,11 @@ app.use(morgan('tiny'));
 
 const db = require('./src/config/dbConfig.js');
 
-db.sequelize.sync({force: false}).then(() => {
+db.sequelize.sync({force: true}).then(() => {
     console.log('DB Sync... done!');
 });
 
+require('./src/route/init.js')(app);
 require('./src/route/role.js')(app);
 require('./src/route/user.js')(app);
 
