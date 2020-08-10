@@ -33,6 +33,7 @@ db.sequelize.sync({force: true}).then(() => {
 });
 
 require('./src/route/init.js')(app);
+require('./src/route/ocr.js')(app);
 require('./src/route/role.js')(app);
 require('./src/route/user.js')(app);
 
