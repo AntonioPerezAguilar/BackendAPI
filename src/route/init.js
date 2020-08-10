@@ -7,7 +7,7 @@ module.exports = (app) => {
      *  get:
      *      tags: 
      *          - Inits
-     *      description: Set initial de roles
+     *      description: Set initial de roles en BBDD
      *      produces:
      *          - application/json
      *      responses:
@@ -21,7 +21,7 @@ module.exports = (app) => {
      *  get:
      *      tags: 
      *          - Inits
-     *      description: Set initial de users
+     *      description: Set initial de users en BBDD
      *      produces:
      *          - application/json
      *      responses:

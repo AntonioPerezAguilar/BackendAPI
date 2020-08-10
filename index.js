@@ -1,28 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const swaggerDocs = require('./src/config/swaggerConfig.js');
 const morgan = require('morgan');
 
 var app = express();
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
-
-const swaggerOptions = {
-    swaggerDefinition: {
-        info: {
-            title: 'API Backend',
-            description: '',
-            contact: {
-                name: 'Antonio'
-            },
-            servers: ['http://localhost:3000']
-        }
-    },
-    apis: ["./src/route/*.js"]
-};
-
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 const db = require('./src/config/dbConfig.js');

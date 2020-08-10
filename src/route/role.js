@@ -1,3 +1,6 @@
+const validate = require('express-joi-validate');
+const validation = require('./validation/roleValidation.js');
+
 module.exports = (app) => {
     const roles = require('../controller/role.js');
 
@@ -7,7 +10,7 @@ module.exports = (app) => {
      *  get:
      *      tags: 
      *          - Roles
-     *      description: Obtener un rol
+     *      summary: Obtener un rol
      *      produces:
      *          - application/json
      *      parameters:
@@ -17,13 +20,60 @@ module.exports = (app) => {
      *            type: integer
      *      responses:
      *          200:
-     *              description: Succesfull
+     *              description: Ok
      */
-    app.get('/api/roles/:roleId', roles.findById);
+    app.get('/api/roles/:roleId', validate(validation.paramId), roles.findById);
 
-    app.post('/api/roles', roles.create);
+    /**
+     * @swagger
+     * /api/roles:
+     *  post:
+     *      tags: 
+     *          - Roles
+     *      summary: Crear un rol
+     *      consumes:
+     *          - application/json
+     *      parameters:
+     *          - in: body
+     *            name: Role
+     *            schema: 
+     *              type: object
+     *              required:
+     *                  - Name
+     *                  - Description
+     *      responses:
+     *          201:
+     *              description: Created
+     */
+    app.post('/api/roles', validate(validation.create), roles.create);
 
-    app.put('/api/roles/:roleId', roles.update);
+
+    /**
+     * @swagger
+     * /api/roles/{roleId}:
+     *  put:
+     *      tags: 
+     *          - Roles
+     *      summary: Modificar un rol
+     *      consumes:
+     *          - application/json
+     *      parameters:
+     *          - name: roleId
+     *            in: path
+     *            required: true
+     *            type: integer
+     *          - in: body
+     *            name: Role
+     *            schema: 
+     *              type: object
+     *              required:
+     *                  - Name
+     *                  - Description
+     *      responses:
+     *          200:
+     *              description: Ok
+     */
+    app.put('/api/roles/:roleId', validate(validation.update), roles.update);
 
     /**
      * @swagger
@@ -31,7 +81,7 @@ module.exports = (app) => {
      *  delete:
      *      tags: 
      *          - Roles
-     *      description: Eliminar un rol
+     *      summary: Eliminar un rol
      *      produces:
      *          - application/json
      *      parameters:
@@ -41,8 +91,8 @@ module.exports = (app) => {
      *            type: integer
      *      responses:
      *          200:
-     *              description: Succesfull
+     *              description: Ok
      */
-    app.delete('/api/roles/:roleId', roles.delete);
+    app.delete('/api/roles/:roleId', validate(validation.paramId), roles.delete);
     
 }
