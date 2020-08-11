@@ -3,31 +3,17 @@ module.exports = (app) => {
 
     /**
      * @swagger
-     * /api/init/roles:
+     * /api/init:
      *  get:
      *      tags: 
      *          - Inits
-     *      description: Set initial de roles en BBDD
+     *      description: Set initial en BBDD
      *      produces:
      *          - application/json
      *      responses:
      *          200:
      *              description: Succesfull
      */
-    app.get('/api/init/roles', inits.generateRoles);
-    /**
-     * @swagger
-     * /api/init/users:
-     *  get:
-     *      tags: 
-     *          - Inits
-     *      description: Set initial de users en BBDD
-     *      produces:
-     *          - application/json
-     *      responses:
-     *          200:
-     *              description: Succesfull
-     */
-    app.get('/api/init/users', inits.generateUsers);
+    app.get('/api/init', inits.generateInit);
 
 }

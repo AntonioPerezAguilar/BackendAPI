@@ -4,8 +4,8 @@ const { sequelize } = require('../config/dbConfig.js');
 const User = db.user;
 const Role = db.role;
 
-exports.generateRoles = (req, res) => {
-    return sequelize.transaction((t) => {
+exports.generateInit = (req, res) => {
+    return sequelize.transaction(async (t) => {
         const roleUsuario =  Role.create({
             Description: "Básico",
             Name: "Usuario"
@@ -18,14 +18,6 @@ exports.generateRoles = (req, res) => {
             Description: "Jefe",
             Name: "Boss"
         }, {transaction: t});
-        return Promise.all([roleUsuario, roleAdmin, roleBoss])
-        .then((roles) => res.status(201).json(roles))
-        .catch(error => res.status(500).send(error))
-    });
-}
-
-exports.generateUsers = (req, res) => {
-    return sequelize.transaction((t) => {
         const userAntonio =  User.create({
             Email: "aperezag@everis.com",
             Name: "Antonio",
@@ -47,8 +39,13 @@ exports.generateUsers = (req, res) => {
             SecondSurname: "Marquez",
             RoleId: 3
         }, {transaction: t});
-        return Promise.all([userAntonio, userEnrique, userAna])
-        .then((users) => res.status(201).json(users))
-        .catch(error => res.status(500).send(error))
+
+        try {
+            const roles = await Promise.all([roleUsuario, roleAdmin, roleBoss]);
+            const users = await Promise.all([userAntonio, userEnrique, userAna]);
+            return res.status(201);
+        } catch (error) {
+            res.status(500).send(error);
+        }
     });
 }
