@@ -43,7 +43,7 @@ exports.generateInit = (req, res) => {
         try {
             const roles = await Promise.all([roleUsuario, roleAdmin, roleBoss]);
             const users = await Promise.all([userAntonio, userEnrique, userAna]);
-            return res.status(201);
+            return res.status(201).send();
         } catch (error) {
             res.status(500).send(error);
         }

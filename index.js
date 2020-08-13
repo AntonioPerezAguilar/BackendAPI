@@ -12,7 +12,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 const db = require('./src/config/dbConfig.js');
 const user = require('./src/model/user.js');
 
-db.sequelize.sync({force: true}).then(() => {
+db.sequelize.sync({force: false}).then(() => {
     console.log('DB Sync... done!');
 });
 
